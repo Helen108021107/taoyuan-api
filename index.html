@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>桃園市統計資料儀表板</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <!-- Chart.js for data visualization -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo">
+                <span class="logo-icon">📊</span>
+                <span class="logo-text">TaoyuanStat</span>
+            </div>
+            <nav class="nav-menu">
+                <a href="#" class="nav-item active">
+                    <span class="icon">📈</span> 資料視覺化
+                </a>
+                <a href="#" class="nav-item">
+                    <span class="icon">📁</span> 原始資料
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="top-bar">
+                <h1 id="page-title">統計資料儀表板</h1>
+                <div class="user-profile">
+                    <span class="username" id="data-source-info">來源: 桃園市政府</span>
+                </div>
+            </header>
+
+            <!-- Metrics Cards (Dynamic) -->
+            <section class="stats-grid" id="metrics-cards">
+                <!-- Cards will be injected here -->
+                <div class="stat-card">
+                    <div class="stat-title">資料筆數</div>
+                    <div class="stat-value" id="total-records">-</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-title">資料年份</div>
+                    <div class="stat-value" id="year-range">-</div>
+                </div>
+            </section>
+
+            <!-- Charts & Rankings Section -->
+            <section class="charts-grid">
+                <!-- Main Chart -->
+                <div class="chart-container glass-panel">
+                    <h3 id="chart-title">統計圖表</h3>
+                    <div style="height: calc(100% - 40px); width: 100%;">
+                        <canvas id="mainChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Top Rankings & Stats -->
+                <div class="glass-panel" style="overflow-y: auto; max-height: 350px;">
+                    <h3>📊 統計摘要與排行 (Top 10)</h3>
+                    
+                    <!-- Summary Stats Mini-table -->
+                    <table class="data-table" style="margin-bottom: 1.5rem; font-size: 0.9em;">
+                        <tbody>
+                            <tr>
+                                <td style="color: #94a3b8;">總計 (Sum)</td>
+                                <td id="stat-sum" style="text-align: right; font-weight: bold;">-</td>
+                            </tr>
+                            <tr>
+                                <td style="color: #94a3b8;">平均 (Avg)</td>
+                                <td id="stat-avg" style="text-align: right; font-weight: bold;">-</td>
+                            </tr>
+                            <tr>
+                                <td style="color: #94a3b8;">最大值 (Max)</td>
+                                <td id="stat-max" style="text-align: right; font-weight: bold;">-</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <!-- Ranking Table -->
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>名稱</th>
+                                <th>數值</th>
+                            </tr>
+                        </thead>
+                        <tbody id="ranking-body">
+                            <!-- Injected by JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Controls (Optional) -->
+            <section class="glass-panel" id="controls-panel" style="display:none; padding: 1rem; margin-bottom: 2rem;">
+                <label for="metric-select" style="margin-right: 10px; color: var(--text-secondary);">選擇統計項目:</label>
+                <select id="metric-select" style="padding: 5px; border-radius: 5px; background: #1e293b; color: white; border: 1px solid #475569;">
+                </select>
+            </section>
+
+            <!-- Data Table -->
+            <section class="recent-activity glass-panel">
+                <div class="section-header">
+                    <h3>詳細資料</h3>
+                </div>
+                <div class="table-responsive">
+                    <table class="data-table">
+                        <thead>
+                            <tr id="table-header">
+                                <!-- Headers injected by JS -->
+                            </tr>
+                        </thead>
+                        <tbody id="table-body">
+                            <!-- Data injected by JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Data Injection Point -->
+    <script>
+        // Default Mock Data if not injected //
+        window.DASHBOARD_DATA = null; 
+    </script>
+    
+    <script src="script.js"></script>
+</body>
+</html>
